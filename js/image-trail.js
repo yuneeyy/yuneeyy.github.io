@@ -3,7 +3,7 @@
    ========================================================================== */
 (() => {
   // 1. 核心安全锁：如果是移动端，直接原地退场，绝对不破坏 mobile-frame.js
-  if (window.innerWidth < 1024) return;
+  if (window.innerWidth < 1200) return;
 
   // 2. 正确的图片路径
   const trailImages = [
