@@ -14,9 +14,9 @@
   --accent-dim:    rgba(143,183,255,.14);
   --accent-line:   rgba(143,183,255,.35);
 
-  --display: 'Space Grotesk', ui-sans-serif, sans-serif;
+  --display: 'Instrument Serif', ui-sans-serif, sans-serif; /*'Space Grotesk'*/
   --body:    'Inter', ui-sans-serif, sans-serif;
-  --mono:    'JetBrains Mono', ui-monospace, monospace;
+  --mono:    'Inter', ui-monospace, monospace;
 
   --container: 1120px;
   --gutter: clamp(20px, 5vw, 64px);
@@ -43,7 +43,7 @@ body{
 
 a{ color:inherit; }
 
-h1,h2{ font-family:var(--display); margin:0; letter-spacing:-0.01em; }
+h1,h2{ font-family:var(--display); margin:0; letter-spacing:0.01em; }
 
 img{ display:block; max-width:100%; }
 
@@ -70,6 +70,7 @@ img{ display:block; max-width:100%; }
   text-decoration:none; color:var(--text); border:1px solid var(--surface-line);
   padding:6px 10px; border-radius:var(--radius);
 }
+.title{ font-weight:500;}
 .site-nav{ display:flex; gap:clamp(16px,3vw,32px); font-family:var(--mono); font-size:13px; }
 .site-nav a{
   text-decoration:none; color:var(--text-muted);
@@ -84,6 +85,15 @@ img{ display:block; max-width:100%; }
 .site-nav a:hover::after{ right:0; }
 
 /* ==========================================================================
+   Control horizontal scroll on mobile to avoid accidental overscroll
+   html, body {
+  overflow-x: hidden;
+}
+   ========================================================================== */
+
+
+
+/* ==========================================================================
    Reveal-on-scroll
    ========================================================================== */
 [data-reveal]{
@@ -93,25 +103,62 @@ img{ display:block; max-width:100%; }
 [data-reveal].is-visible{ opacity:1; transform:translateY(0); }
 
 /* ==========================================================================
-   Hero
+   Hero  min-height: calc(100dvh - 80px); if there is any navbar
    ========================================================================== */
 .hero{
   max-width:var(--container); margin:0 auto;
   padding: clamp(48px,10vh,120px) var(--gutter) clamp(40px,8vh,80px);
-  display:grid; grid-template-columns: 1.15fr .85fr; gap:clamp(24px,5vw,64px);
-  align-items:end;
+  display:grid; gap:clamp(24px,5vw,64px);
+  justify-items: center; 
+  align-items: center;
+  min-height: 100dvh; 
+  box-sizing: border-box; 
 }
-.eyebrow{
-  font-family:var(--mono); font-size:12px; letter-spacing:.12em; text-transform:uppercase;
-  color:var(--accent); margin:0 0 18px;
+
+/*grid-template-columns: 1.15fr .85fr;*/
+
+.eyebrow {
+  font-family: var(--mono); 
+  font-size: 12px; 
+  letter-spacing: .12em; 
+  text-transform: uppercase;
+  margin: 0 0 18px;
+
+  display: inline-block; 
+
+  background: linear-gradient(135deg, #ffffff 0%, #ffffff81 100%); 
+  
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent; 
 }
 .hero-title{
-  font-size:clamp(40px, 6.4vw, 84px);
-  font-weight:600; line-height:1.02; color:var(--text);
+  font-size:clamp(40px, 4.8vw, 100px);
+  font-weight:400; line-height:1.02; color:var(--text);
+  text-align: center; 
+  margin: 0 auto;
+  margin-bottom: 0;
+  margin: clamp(24px, 12vh, 200px) 0 clamp(32px, 15vh, 400px);
 }
 .hero-lede{
-  margin:28px 0 0; max-width:44ch; color:var(--text-muted); font-size:clamp(15px,1.6vw,18px);
+  margin:28px 0 0; max-width:60ch; font-size:clamp(14px, 1.6vw, 14px);
+  line-height: 1.4;
+  text-align: center; 
+  max-width: 34rem; 
+  margin: 0 auto;
+  font-weight:300;
 }
+
+.hero-meta {
+
+  margin-top: auto; 
+  margin-bottom: clamp(32px, 15vh, 200px); 
+  
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
 .frame--portrait{ aspect-ratio:4/5; }
 
 .intro-line{
@@ -119,6 +166,23 @@ img{ display:block; max-width:100%; }
   font-family:var(--display); font-weight:500; font-size:clamp(19px,2.4vw,26px);
   line-height:1.5; color:var(--text);
   border-left:2px solid var(--accent-line); padding-left:24px;
+}
+
+.title {
+  font-size: clamp(14px, 1.6vw, 18px);
+  font-weight: 600; 
+  margin-top: auto;
+  margin: 0 0 16px 0;
+}
+
+.title-divider {
+  margin: 0 10px;
+  opacity: 0.4;  
+  font-weight: 200;
+}
+
+.title-sub {
+  font-weight: 300;
 }
 
 /* ==========================================================================
@@ -131,7 +195,7 @@ img{ display:block; max-width:100%; }
 }
 .project-header{ max-width:70ch; margin-bottom:clamp(28px,5vh,48px); }
 .project-header h2{
-  font-size:clamp(26px,3.6vw,40px); font-weight:600; margin-bottom:14px;
+  font-size:clamp(40px, 4.8vw, 84px); font-weight:400; margin-bottom:14px; line-height:1.2; color:var(--text);
 }
 .project-copy{ color:var(--text-muted); font-size:clamp(15px,1.5vw,17px); max-width:58ch; }
 
@@ -224,20 +288,30 @@ figure.frame figcaption{ background:none; padding:0; }
 /* ==========================================================================
    Quotes
    ========================================================================== */
-.pull-quote{
-  margin: clamp(40px,6vh,64px) auto; max-width:52ch;
-  font-family:var(--display); font-weight:500;
-  font-size:clamp(20px,2.8vw,30px); line-height:1.4;
-  color:var(--text); position:relative; padding-left:28px;
+.pull-quote {
+  /* 🌟 彻底干掉 margin 左右的推力，恢复干净的上下 margin */
+  margin: clamp(40px, 6vh, 64px) 0; 
+  
+  /* 🌟 让盒子占满或者保持合理的宽度 */
+  max-width: 100%; 
+  
+  font-family: var(--display); 
+  font-weight: 500;
+  font-size: clamp(20px, 2.8vw, 30px); 
+  line-height: 1.4;
+  color: var(--text); 
+  position: relative; 
+  padding-left: 0; 
+
+  /* 🌟 核心：让文字直接在右边排版，没有任何左边距打扰 */
+  text-align: left; 
 }
-.pull-quote::before{
-  content:''; position:absolute; left:0; top:6px; bottom:6px; width:2px;
-  background:var(--accent);
-}
+
+
 
 .closing-quote{
   max-width:var(--container); margin:0 auto; padding: clamp(80px,14vh,140px) var(--gutter);
-  font-family:var(--display); font-weight:600; text-align:center;
+  font-family:var(--display); font-weight:400; text-align:center;
   font-size:clamp(24px,4.4vw,46px); line-height:1.3; color:var(--text);
   border-top:1px solid var(--surface-line);
 }
@@ -284,4 +358,282 @@ a:focus-visible, button:focus-visible{
   body{ padding-top:64px; }
   .frame-grid{ grid-template-columns:repeat(2,1fr); }
   .frame::after{ font-size:9px; }
+}
+
+/* ==========================================================================
+   Hero-grid
+   ========================================================================== */
+.hero {
+  position: relative;
+  overflow: hidden;
+}
+
+#texture-canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.hero-copy {
+  display: flex;
+  flex-direction: column; 
+  align-items: center;     
+  text-align: center;
+  
+  min-height: 100%;          
+  box-sizing: border-box;
+  
+  max-width: 52rem;     
+  margin: 0 auto;
+  position: relative;
+  z-index: 1;
+}
+
+
+.frame {
+  position: relative;
+  z-index: 1;
+}
+
+/* ==========================================================================
+   Hero-grid animation
+   ========================================================================== */
+.work-marquee {
+  width: 100%;
+  position: relative;
+  transform: translateX(-50%);
+  overflow: hidden;
+  background: #1a1a1a;
+}
+
+.work-marquee-track {
+  display: flex;
+  width: max-content;
+  gap: 4px;
+  animation: marquee-scroll 45s linear infinite;
+}
+
+.work-marquee:hover .work-marquee-track {
+  animation-play-state: paused;
+}
+
+@keyframes marquee-scroll {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+
+.marquee-item {
+  flex: none;
+  height: 340px;
+  overflow: hidden;
+}
+
+.marquee-item img,
+.marquee-item video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.marquee-item.ratio-wide { width: 480px; }
+.marquee-item.ratio-square { width: 340px; }
+.marquee-item.ratio-portrait { width: 260px; }
+
+@media (max-width: 720px) {
+  .marquee-item { height: 220px; }
+  .marquee-item.ratio-wide { width: 300px; }
+  .marquee-item.ratio-square { width: 220px; }
+  .marquee-item.ratio-portrait { width: 170px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .work-marquee-track { animation: none; }
+}
+
+/* ==========================================================================
+   NEW WORD REVEAL ANIMATION (全自动逐字淡入飘上 - 修复版)
+   ========================================================================== */
+
+.word-reveal {
+  display: block;
+  
+}
+
+.word-reveal .word-space {
+  display: inline-block;
+}
+
+.word-reveal .word {
+  display: inline-block;
+  opacity: 0;
+  /* 🌟 初始状态：往下沉 20px，处于完全透明状态 */
+  transform: translateY(35px); 
+}
+
+/* 🌟 核心：当主 JS 的监听器给父级大容器打上 .is-visible 时，激活动画 */
+[data-reveal].is-visible .word-reveal .word,
+.word-reveal.is-visible .word {
+  /* 触发下方写好的 revealWord 动画，持续 0.85 秒 */
+  animation: revealWordPerfect 0.9s cubic-bezier(0.16, 1, 0.3, 1) both;
+  
+  /* 🌟 核心修复：直接硬写原生计算，浏览器解析这个最稳，绝对不会丢失延迟 */
+  animation-delay: calc(var(--word-index) * 0.065s) !important;
+}
+
+/* ✨ 3. 终极黄金比例关键帧：用时间轴百分比，完美实现你想要的“人都到半路了，灯才开始亮” */
+@keyframes revealWordPerfect {
+  0% {
+    opacity: 0;
+    transform: translateY(35px); /* 起跑点：完全隐形 */
+  }
+  /* 🌟 重点在这里：动画已经跑了快三分之一（30%的时间），字已经往上冲到了 20px 左右 */
+  /* 但我们用关键帧死死压住它，让它的不透明度依然是 0！这就实现了完美的“空中错位现形” */
+  30% {
+    opacity: 0;
+  }
+  /* 从 30% 到 100% 的后半程，透明度才开始快速从 0 变到 100% */
+  100% {
+    opacity: 1;
+    transform: translateY(0); /* 完美归位 */
+  }
+}
+
+
+/* ✨ 轨道 B：纯粹管透明度，因为有额外的 +0.15s 延迟，它会晚出发，并在 0.5s 内快速变实 */
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+/* ==========================================================================
+  IMAGE TRAIL EFFECT
+   ========================================================================== */
+#image-trail-container {
+  position: fixed; /* 🌟 变成全局 fixed，不接受任何父元素的干扰 */
+  inset: 0;
+  pointer-events: none;
+  z-index: 9999;   /* 浮在最上方 */
+}
+
+.trail-image {
+  position: fixed; /* 🌟 必须和容器一致 */
+  left: 0;
+  top: 0;
+  width: clamp(140px, 15vw, 220px); 
+  aspect-ratio: 16/10;             
+  object-fit: cover;
+  border-radius: var(--radius);     
+  border: none;
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.3); 
+  
+  opacity: 0;
+  transform: translate(-50%, -50%) scale(0.4);
+  
+  transition: 
+    transform 0.6s cubic-bezier(0.16, 1, 0.3, 1), 
+    opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.trail-image.is-active {
+  opacity: 1;
+  transform: translate(-50%, -50%) scale(1);
+  transition: 
+    transform 0.6s cubic-bezier(0.16, 1, 0.3, 1), 
+    opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.trail-image.is-fading {
+  opacity: 0;
+  transform: translate(-50%, -50%) scale(1.05);
+  transition: transform 0.4s ease, opacity 0.4s ease;
+}
+
+/* ==========================================================================
+   🖥️ 电脑端默认样式 (Desktop Base)
+   ========================================================================== */
+.hero-image-frame{
+  display: none;
+}
+
+
+/* ==========================================================================
+   📱 移动端与平板端样式 (Tablet & Mobile View < 1024px)
+   ========================================================================== */
+@media (max-width: 1023px) {
+  
+  /* 1. 强制关闭电脑端的图片跟随 DOM（双重保险） */
+  .trail-image {
+    display: none !important;
+  }
+  
+  .hero-image-frame {
+    display: block !important;
+    position: relative;
+    width: 100%;
+    max-width: 480px;
+    aspect-ratio: 16 / 10;
+    margin: 40px auto;
+    overflow: hidden; /* 🌟 必须要有这行，把右边等待滑入的图片完美隐藏 */
+    border-radius: var(--radius, 12px);
+    border: none;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+    background-color: #0b0b0b;
+  }
+
+  .hero-image-frame::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to bottom, rgba(0,0,0,0.3) 0%, transparent 40%);
+  z-index: 4; /* 确保压在所有图片上面，用来保护顶部的白色文本 */
+  pointer-events: none;
+}
+  
+  /* 🌟 状态 A：默认状态。所有的图片生来就老老实实呆在相框正下方（100%）伺机而动 */
+  .frame-img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transform: translateY(-100%) scale(1.15); 
+    opacity: 0;
+    z-index: 1;
+    
+    /* 🌟 顶奢动效曲线：0.6秒，带有一种极其丝滑的吸附阻尼感（类似 Apple 官网动画） */
+    transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1), 
+                opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  
+  /* 🌟 状态 B：激活状态。新图片从天而降，同时从 1.15 倍完美缩回原尺寸（1倍），并完全显现 */
+  .frame-img.is-playing {
+    transform: translateY(0) scale(1) !important; 
+    opacity: 1 !important;
+    z-index: 3; /* 压在最上层 */
+  }
+
+  /* 🌟 状态 C：退位垫底状态。刚刚播完的旧图，在底下静静地缩小到 0.65 倍并优雅淡出 */
+  .frame-img.was-playing {
+    transform: translateY(0) scale(0.35) !important; /* 🌟 产生微妙的物理往下陷的视差感 */
+    opacity: 0 !important; /* 慢慢蒸发淡出 */
+    z-index: 2; /* 夹在中间作为背景衬底 */
+    
+    /* 允许旧图片淡出时有 0.6 秒的退场动画 */
+    transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1), 
+                opacity 0.6s cubic-bezier(0.16, 1, 0.3, 0.6) !important;
+  }
+  
+  h1.hero-title{
+    margin: 24px 0px 24px 0px !important;}
+
+  
 }
