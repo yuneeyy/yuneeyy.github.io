@@ -10,12 +10,19 @@
     'images/hero-section/imagetrails_07_3x.webp',
     'images/hero-section/imagetrails_08_3x.webp', 
     'images/hero-section/imagetrails_09_3x.webp', 
-    'images/hero-section/imagetrails_10_3x.webp'
+    'images/hero-section/imagetrails_10_3x.webp',
+    'images/hero-section/imagetrails_11_3x.webp',
+    'images/hero-section/imagetrails_12_3x.webp',
+    'images/hero-section/imagetrails_13_3x.webp',
+    'images/hero-section/imagetrails_14_3x.webp',
   ];
 
+  // 🌟 [新增工具函数]：生成 -3 到 +3 之间的随机角度，小数更细腻
+  function getRandomRotate() {
+    return (Math.random() * 10 - 5).toFixed(1); 
+  }
+
   function initMobileFrame() {
-    // 🌟 核心修复：同步拉高防线到 1200px。
-    // 只有当屏幕宽度真正大于 1200px 且【不是】触控屏时，才拦截不执行。
     if (window.innerWidth >= 1200 && !matchMedia('(pointer:coarse)').matches) {
       return;
     }
@@ -29,7 +36,13 @@
       const img = document.createElement('img');
       img.src = src;
       img.className = 'frame-img';
-      if (index === 0) img.classList.add('is-playing');
+      
+      // 🌟 第一张图初始化时也给一个随机角度
+      if (index === 0) {
+        img.classList.add('is-playing');
+        img.style.setProperty('--rand-deg', `${getRandomRotate()}deg`);
+      }
+      
       frame.appendChild(img);
     });
 
@@ -44,18 +57,18 @@
       // 1. 清空上一轮残留的垫底状态
       imgs.forEach(img => img.classList.remove('was-playing'));
       
-      // 2. 旧图片退位，变成垫底背板
+      // 2. 旧图片退位，保持不动
       oldImg.classList.remove('is-playing');
       oldImg.classList.add('was-playing');
       
-      // 3. 新图片直接激活类名
+      // 3. 🌟 新图片登场前，算一个全新的随机角度，通过 CSS 变量传过去
+      nextImg.style.setProperty('--rand-deg', `${getRandomRotate()}deg`);
       nextImg.classList.add('is-playing');
       
       currentIndex = nextIndex;
     }, 1000); 
   }
 
-  // 稳妥起见，如果 DOM 已经加载完了就直接执行，没加载完就等 DOMContentLoaded
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', initMobileFrame);
   } else {

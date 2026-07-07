@@ -528,7 +528,7 @@ a:focus-visible, button:focus-visible{
   left: 0;
   top: 0;
   width: clamp(140px, 15vw, 220px); 
-  aspect-ratio: 16/10;             
+  aspect-ratio: 16/9;             
   object-fit: cover;
   border-radius: var(--radius);     
   border: none;
@@ -574,66 +574,56 @@ a:focus-visible, button:focus-visible{
     display: none !important;
   }
   
-  .hero-image-frame {
+ .hero-image-frame {
     display: block !important;
     position: relative;
     width: 100%;
-    max-width: 480px;
-    aspect-ratio: 16 / 10;
+    max-width: 480px; 
+    aspect-ratio: 16 / 9;
     margin: 40px auto;
-    overflow: hidden; /* 🌟 必须要有这行，把右边等待滑入的图片完美隐藏 */
+    overflow: hidden; 
     border-radius: var(--radius, 12px);
-    border: none;
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
     background-color: #0b0b0b;
   }
 
   .hero-image-frame::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(to bottom, rgba(0,0,0,0.3) 0%, transparent 40%);
-  z-index: 4; /* 确保压在所有图片上面，用来保护顶部的白色文本 */
-  pointer-events: none;
-}
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to bottom, rgba(0,0,0,0.2) 0%, transparent 40%);
+    z-index: 4; 
+    pointer-events: none;
+  }
   
-  /* 🌟 状态 A：默认状态。所有的图片生来就老老实实呆在相框正下方（100%）伺机而动 */
+  /* 🌟 状态 A：默认状态。新图片老老实实呆在原地，完全透明 */
   .frame-img {
     position: absolute;
-    top: 0;
-    left: 0;
+    inset: 0;
     width: 100%;
     height: 100%;
     object-fit: cover;
-    transform: translateY(-100%) scale(1.15); 
     opacity: 0;
     z-index: 1;
     
-    /* 🌟 顶奢动效曲线：0.6秒，带有一种极其丝滑的吸附阻尼感（类似 Apple 官网动画） */
-    transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1), 
-                opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+    /* 🌟 0.6秒均匀淡入，不加任何物理视差，眼睛最舒服 */
+    transition: opacity 0.6s ease-in-out;
   }
   
-  /* 🌟 状态 B：激活状态。新图片从天而降，同时从 1.15 倍完美缩回原尺寸（1倍），并完全显现 */
+  /* 🌟 状态 B：激活状态。新图片顺滑显现 */
   .frame-img.is-playing {
-    transform: translateY(0) scale(1) !important; 
     opacity: 1 !important;
-    z-index: 3; /* 压在最上层 */
+    z-index: 3; 
   }
 
-  /* 🌟 状态 C：退位垫底状态。刚刚播完的旧图，在底下静静地缩小到 0.65 倍并优雅淡出 */
+  /* 🌟 状态 C：退位状态。旧图片在底下老老实实垫底，绝不闪烁 */
   .frame-img.was-playing {
-    transform: translateY(0) scale(0.35) !important; /* 🌟 产生微妙的物理往下陷的视差感 */
-    opacity: 0 !important; /* 慢慢蒸发淡出 */
-    z-index: 2; /* 夹在中间作为背景衬底 */
-    
-    /* 允许旧图片淡出时有 0.6 秒的退场动画 */
-    transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1), 
-                opacity 0.6s cubic-bezier(0.16, 1, 0.3, 0.6) !important;
+    opacity: 1 !important; 
+    z-index: 2; 
+    transition: none !important; /* 瞬间切换层级，没有任何多余动作 */
   }
   
-  h1.hero-title{
-    margin: 24px 0px 24px 0px !important;}
-
-  
+  h1.hero-title {
+    margin: 24px 0px 24px 0px !important;
+  }
 }

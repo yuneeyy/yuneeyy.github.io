@@ -16,7 +16,11 @@
     'images/hero-section/imagetrails_07_3x.webp',
     'images/hero-section/imagetrails_08_3x.webp', 
     'images/hero-section/imagetrails_09_3x.webp', 
-    'images/hero-section/imagetrails_10_3x.webp'
+    'images/hero-section/imagetrails_10_3x.webp',
+    'images/hero-section/imagetrails_11_3x.webp',
+    'images/hero-section/imagetrails_12_3x.webp',
+    'images/hero-section/imagetrails_13_3x.webp',
+    'images/hero-section/imagetrails_14_3x.webp',
 
   ];
 
