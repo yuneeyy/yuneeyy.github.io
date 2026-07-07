@@ -14,7 +14,11 @@
   ];
 
   function initMobileFrame() {
-    if (window.innerWidth >= 1024) return;
+    // 🌟 核心修复：同步拉高防线到 1200px。
+    // 只有当屏幕宽度真正大于 1200px 且【不是】触控屏时，才拦截不执行。
+    if (window.innerWidth >= 1200 && !matchMedia('(pointer:coarse)').matches) {
+      return;
+    }
 
     const frame = document.querySelector('.hero-image-frame');
     if (!frame) return;
@@ -51,7 +55,10 @@
     }, 1000); 
   }
 
-  document.addEventListener('DOMContentLoaded', () => {
+  // 稳妥起见，如果 DOM 已经加载完了就直接执行，没加载完就等 DOMContentLoaded
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initMobileFrame);
+  } else {
     initMobileFrame();
-  });
+  }
 })();
