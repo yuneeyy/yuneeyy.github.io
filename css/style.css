@@ -14,7 +14,7 @@
   --accent-dim:    rgba(143,183,255,.14);
   --accent-line:   rgba(143,183,255,.35);
 
-  --display: 'Instrument Serif', ui-sans-serif, sans-serif; /*'Space Grotesk'*/
+  --display: 'Instrument Serif', ui-sans-serif, sans-serif; 
   --body:    'Inter', ui-sans-serif, sans-serif;
   --mono:    'Inter', ui-monospace, monospace;
 
@@ -55,34 +55,87 @@ img{ display:block; max-width:100%; }
 }
 
 /* ==========================================================================
-   Header / Nav
+   Header / Nav (硬朗磨砂·滚动响应版)
    ========================================================================== */
-.site-header{
-  position:fixed; top:0; left:0; right:0; z-index:100;
-  display:flex; align-items:center; justify-content:space-between;
-  padding: 20px var(--gutter);
-  background:rgba(11,12,13,.85);
-  backdrop-filter:blur(8px);
-  border-bottom:1px solid var(--surface-line);
+
+.site-header {
+  position: fixed; 
+  top: 0; left: 0; right: 0; 
+  z-index: 100;
+  display: flex; 
+  align-items: center; 
+  justify-content: space-between; 
+  height: 60px;
+  padding: 0px var(--gutter);
+  background: transparent;
+  transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
 }
-.wordmark{
-  font-family:var(--mono); font-size:14px; letter-spacing:.14em;
-  text-decoration:none; color:var(--text); border:1px solid var(--surface-line);
-  padding:6px 10px; border-radius:var(--radius);
+
+.site-header.is-scrolled {
+  /* 确保这里有背景色，即使是很淡的颜色 */
+background: rgba(0, 0, 0, 0.2);
+  backdrop-filter: blur(15px);
+  -webkit-backdrop-filter: blur(15px);
+  
+  /* 2. 核心：在磨砂之上叠加一个“边缘遮罩” */
+  /* 使用 mask-image 实现羽化，确保它作用在模糊背景上 */
+  -webkit-mask-image: linear-gradient(
+    to bottom, 
+    black 0%,    /* 顶部完全显示 */
+    black 60%,   /* 中间主体完全显示 */
+    transparent 100% /* 边缘 60%-100% 区域进行线性平滑羽化 */
+  );
+  mask-image: linear-gradient(to bottom, black 0%, black 60%, transparent 100%);
+  
+  /* 确保遮罩覆盖整个区域 */
+  -webkit-mask-size: 100% 100%;
+  mask-size: 100% 100%;
 }
-.title{ font-weight:500;}
-.site-nav{ display:flex; gap:clamp(16px,3vw,32px); font-family:var(--mono); font-size:13px; }
-.site-nav a{
-  text-decoration:none; color:var(--text-muted);
-  position:relative; padding-bottom:2px;
-  transition:color .25s ease;
+
+.logo-link {
+  font-weight: 600;
+  display: flex;
+  text-decoration: none;
+  color: var(--text);
+  padding: 8px 12px;
+  border-radius: 4px;
+  transition: background 0.3s ease;
 }
-.site-nav a::after{
-  content:''; position:absolute; left:0; right:100%; bottom:0; height:1px;
-  background:var(--accent); transition:right .25s ease;
+
+.logo-link:hover {
+  background:none;
+  color: #fff;
 }
-.site-nav a:hover{ color:var(--text); }
-.site-nav a:hover::after{ right:0; }
+
+.nav-button {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 8px 12px;
+  text-decoration: none;
+  color: var(--text);
+  font-family: var(--mono);
+  border-radius: 4px;
+  transition: background 0.3s ease;
+}
+
+.nav-button:hover {
+  background: none;
+  color: #fff;
+}
+
+.arrow-icon {
+  width: 20px;
+  height: 20px;
+  stroke: var(--text);
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* 悬停时，箭头做一个轻微的旋转或位移，提示它是“可点击的” */
+.nav-button:hover .arrow-icon {
+  transform: translateX(3px); /* 悬停时箭头向右轻微移动 */
+}
+
 
 /* ==========================================================================
    Control horizontal scroll on mobile to avoid accidental overscroll
@@ -107,7 +160,7 @@ img{ display:block; max-width:100%; }
    ========================================================================== */
 .hero{
   max-width:var(--container); margin:0 auto;
-  padding: clamp(48px,10vh,120px) var(--gutter) clamp(40px,8vh,80px);
+  padding: clamp(48px,10vh,80px) var(--gutter) clamp(40px,8vh,80px);
   display:grid; gap:clamp(24px,5vw,64px);
   justify-items: center; 
   align-items: center;
@@ -133,26 +186,28 @@ img{ display:block; max-width:100%; }
   -webkit-text-fill-color: transparent; 
 }
 .hero-title{
-  font-size:clamp(40px, 4.8vw, 100px);
-  font-weight:400; line-height:1.02; color:var(--text);
+  font-size:clamp(48px, 6.6vw, 90px);
+  font-weight:300; line-height:1em; color:var(--text); letter-spacing: -.04em;
   text-align: center; 
   margin: 0 auto;
   margin-bottom: 0;
-  margin: clamp(24px, 12vh, 200px) 0 clamp(32px, 15vh, 400px);
+  margin: clamp(32px, 15vh, 80px) 0 clamp(32px, 15vh, 400px);
+  max-width: 50rem;
 }
 .hero-lede{
-  margin:28px 0 0; max-width:60ch; font-size:clamp(14px, 1.6vw, 14px);
+  margin:28px 0 0; max-width:60ch; font-size:clamp(14px, 1.6vw, 16px);
   line-height: 1.4;
   text-align: center; 
   max-width: 34rem; 
   margin: 0 auto;
   font-weight:300;
+  color:var(--text-muted);
 }
 
 .hero-meta {
 
   margin-top: auto; 
-  margin-bottom: clamp(32px, 15vh, 200px); 
+  margin-bottom: clamp(32px, 15vh, 64px); 
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -186,10 +241,10 @@ img{ display:block; max-width:100%; }
 }
 
 .title {
-  font-size: clamp(14px, 1.6vw, 18px);
+  font-size: clamp(14px, 1.6vw, 16px);
   font-weight: 600; 
   margin-top: auto;
-  margin: 0 0 16px 0;
+  margin-bottom: 5px;
 }
 
 .title-divider {
@@ -202,6 +257,29 @@ img{ display:block; max-width:100%; }
   font-weight: 300;
 }
 
+
+/* ==========================================================================
+   Scroll down arrow indicator
+   ========================================================================== */
+
+.scroll-down-arrow {
+  position: absolute;
+  bottom: 60px;
+  left: 50%;
+  transform: translateX(-50%);
+  color: var(--text);
+  font-size: 24px;
+  opacity: 0.6;
+  
+  /* 触发动画：bounce 是循环的上下跳动 */
+  animation: bounce 2s infinite ease-in-out;
+}
+
+@keyframes bounce {
+  0%, 100% { transform: translateY(0) translateX(-50%); }
+  50% { transform: translateY(-10px) translateX(-50%); }
+}
+
 /* ==========================================================================
    Project sections
    ========================================================================== */
@@ -210,9 +288,13 @@ img{ display:block; max-width:100%; }
   padding: clamp(56px,9vh,96px) var(--gutter);
   border-top:1px solid var(--surface-line);
 }
-.project-header{ max-width:70ch; margin-bottom:clamp(28px,5vh,48px); }
+
+.project-header{
+   max-width:70ch; margin-bottom:clamp(28px,5vh,48px);  
+  }
+
 .project-header h2{
-  font-size:clamp(40px, 4.8vw, 84px); font-weight:400; margin-bottom:14px; line-height:1.2; color:var(--text);
+  font-size:clamp(40px, 4.8vw, 60px); font-weight:400; margin-bottom:14px; line-height:1em; color:var(--text); letter-spacing: -.04em;
 }
 .project-copy{ color:var(--text-muted); font-size:clamp(15px,1.5vw,17px); max-width:58ch; }
 
@@ -330,7 +412,7 @@ figure.frame figcaption{ background:none; padding:0; }
   max-width:var(--container); margin:0 auto; padding: clamp(80px,14vh,140px) var(--gutter);
   font-family:var(--display); font-weight:400; text-align:center;
   font-size:clamp(24px,4.4vw,46px); line-height:1.3; color:var(--text);
-  border-top:1px solid var(--surface-line);
+  border-top:none;
 }
 
 /* ==========================================================================
@@ -415,61 +497,6 @@ a:focus-visible, button:focus-visible{
   z-index: 1;
 }
 
-/* ==========================================================================
-   Hero-grid animation
-   ========================================================================== */
-.work-marquee {
-  width: 100%;
-  position: relative;
-  transform: translateX(-50%);
-  overflow: hidden;
-  background: #1a1a1a;
-}
-
-.work-marquee-track {
-  display: flex;
-  width: max-content;
-  gap: 4px;
-  animation: marquee-scroll 45s linear infinite;
-}
-
-.work-marquee:hover .work-marquee-track {
-  animation-play-state: paused;
-}
-
-@keyframes marquee-scroll {
-  from { transform: translateX(0); }
-  to { transform: translateX(-50%); }
-}
-
-.marquee-item {
-  flex: none;
-  height: 340px;
-  overflow: hidden;
-}
-
-.marquee-item img,
-.marquee-item video {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  display: block;
-}
-
-.marquee-item.ratio-wide { width: 480px; }
-.marquee-item.ratio-square { width: 340px; }
-.marquee-item.ratio-portrait { width: 260px; }
-
-@media (max-width: 720px) {
-  .marquee-item { height: 220px; }
-  .marquee-item.ratio-wide { width: 300px; }
-  .marquee-item.ratio-square { width: 220px; }
-  .marquee-item.ratio-portrait { width: 170px; }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .work-marquee-track { animation: none; }
-}
 
 /* ==========================================================================
    NEW WORD REVEAL ANIMATION (全自动逐字淡入飘上 - 修复版)
@@ -498,7 +525,7 @@ a:focus-visible, button:focus-visible{
   animation: revealWordPerfect 0.9s cubic-bezier(0.16, 1, 0.3, 1) both;
   
   /* 🌟 核心修复：直接硬写原生计算，浏览器解析这个最稳，绝对不会丢失延迟 */
-  animation-delay: calc(var(--word-index) * 0.065s) !important;
+  animation-delay: calc(var(--word-index) * 0.080s) !important;
 }
 
 /* ✨ 3. 终极黄金比例关键帧：用时间轴百分比，完美实现你想要的“人都到半路了，灯才开始亮” */
@@ -529,6 +556,8 @@ a:focus-visible, button:focus-visible{
     opacity: 1;
   }
 }
+
+
 
 /* ==========================================================================
   IMAGE TRAIL EFFECT
@@ -643,4 +672,33 @@ a:focus-visible, button:focus-visible{
   h1.hero-title {
     margin: 24px 0px 24px 0px !important;
   }
+}
+
+
+/* 滚动条轨道：固定在屏幕右侧 */
+.scroll-indicator-track {
+  position: fixed;
+  top: 50%;
+  right: 12px;
+  transform: translateY(-50%);
+  width: 4px;
+  height: 200px; /* 轨道高度 */
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 2px;
+  z-index: 9999;
+  opacity: 0; /* 默认隐藏 */
+  transition: opacity 0.3s ease; /* 优雅的淡入淡出 */
+}
+
+/* 轨道显示状态：只要有这个类名，就显示 */
+.scroll-indicator-track.is-visible {
+  opacity: 1;
+}
+
+/* 红色的指示滑块 */
+.scroll-indicator-bar {
+  width: 100%;
+  background: #ffffff;
+  border-radius: 2px;
+  transition: height 0.1s linear;
 }

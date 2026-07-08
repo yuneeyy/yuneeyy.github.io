@@ -15,13 +15,30 @@
 <div class="grain" aria-hidden="true"></div>
 
 <header class="site-header" data-reveal>
-  <a class="wordmark" href="#top">YYF</a>
-  <nav class="site-nav">
+ 
+  <a href="/" class="logo-link" onclick="window.location.reload(); return false;">
+    <div class="logo">YUEN YI FOO</div>
+  </a>
+  
+ 
+  <a href="assets/yuenyifoo-cv.pdf" target="_blank" rel="noopener" class="nav-button">
+    <span>CV</span>
+  <svg class="arrow-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    <line x1="7" y1="17" x2="17" y2="7"></line>
+    <polyline points="7 7 17 7 17 17"></polyline>
+  </svg>
+  </a>
+</header>
+
+<!--
+ <a class="wordmark" href="#top">YYF</a>
+ <nav class="site-nav">
     <a href="#work">Work</a>
     <a href="#about">About</a>
     <a href="#contact">Contact</a>
-  </nav>
-</header>
+  </nav>-->
+
+
 
 <!-- ============ HERO ============ -->
 <main id="top">
@@ -29,9 +46,9 @@
   <section class="hero" id="hero">
     
     <div class="hero-copy" data-reveal>
-      <h1 class="hero-title word-reveal">Designing visual systems that scale.</h1>
+      <h1 class="hero-title word-reveal">Designing Visual Systems That Scale</h1>
     
-      <div class="hero-image-frame">
+      <div class="hero-image-frame mobile-frame">
         <img src="images/hero-section/imagetrails_01_3x.webp" class="frame-img is-playing" alt="Featured Work">
       </div>
 
@@ -44,55 +61,19 @@
       </div>
    </div>
     <div id="image-trail-container"></div>
+    <div class="scroll-down-arrow data-reveal">
+  <span>↓</span>
+</div>
 </section>
 
-<!-- 
-    <canvas id="texture-canvas" aria-hidden="true"></canvas>
-    <figure class="frame frame--portrait" data-reveal data-label="hero-portrait">
-      <img src="images/hero-portrait.jpg" alt="Yuen Yi Foo portrait / workspace" loading="eager">
-    </figure>
 
-  <p class="intro-line" id="about" data-reveal>
-    I enjoy solving design problems that go beyond visuals. My work spans branding,
-    websites, product UI, design systems and production workflows for enterprise software.
-  </p>
-
-
-  <figure class="frame frame--full" data-reveal data-label="hero-portrait-02">
-      <img src="images/hero-portrait.jpg" alt="Yuen Yi Foo portrait / workspace" loading="eager">
-    </figure>
--->
-
-<!--
-</section>
-   <div class="work-marquee" data-reveal>
-    <div class="work-marquee-track">
-      <div class="marquee-item ratio-wide"><img src="images/footfallcam-website-03.jpg" alt="FootfallCam website" loading="lazy"></div>
-      <div class="marquee-item ratio-square"><img src="images/footfallcam-website-03.jpg" alt="Dashboard UI" loading="lazy"></div>
-      <div class="marquee-item ratio-portrait"><video src="videos/work-03.mp4" autoplay muted loop playsinline></video></div>
-      <div class="marquee-item ratio-wide"><img src="images/footfallcam-website-03.jpg" alt="Technical drawing" loading="lazy"></div>
-      <div class="marquee-item ratio-square"><img src="images/footfallcam-website-03.jpg" alt="Product enclosure" loading="lazy"></div>
-      <div class="marquee-item ratio-portrait"><img src="images/footfallcam-website-03.jpg" alt="Pitch deck" loading="lazy"></div>
-      -->
-      
-      <!-- duplicate set below, required for the seamless loop, not new content 
-      <div class="marquee-item ratio-wide" aria-hidden="true"><img src="images/footfallcam-website-03.jpg alt=" loading="lazy"></div>
-      <div class="marquee-item ratio-square" aria-hidden="true"><img src="images/footfallcam-website-03.jpg" alt="" loading="lazy"></div>
-      <div class="marquee-item ratio-portrait" aria-hidden="true"><video src="videos/work-03.mp4" autoplay muted loop playsinline></video></div>
-      <div class="marquee-item ratio-wide" aria-hidden="true"><img src="images/footfallcam-website-03.jpg" alt="" loading="lazy"></div>
-      <div class="marquee-item ratio-square" aria-hidden="true"><img src="images/footfallcam-website-03.jpg" alt="" loading="lazy"></div>
-      <div class="marquee-item ratio-portrait" aria-hidden="true"><img src="images/footfallcam-website-03.jpg" alt="" loading="lazy"></div>
-    </div>
-  </div>
-  -->
-
-  <div id="work">
+<div id="work">
 
 
   <!-- ============ FOOTFALLCAM: ECOSYSTEM ============ -->
   <section class="project">
     <header class="project-header" data-reveal>
-      <p class="eyebrow">FootfallCam — 2020–2025</p>
+   
       <h2 class="word-reveal">Building an Enterprise Brand Ecosystem</h2>
       <p class="project-copy">
         FootfallCam needed to evolve beyond a hardware manufacturer. As low-cost
@@ -114,7 +95,7 @@
   <!-- ============ WEBSITE EVOLUTION ============ -->
   <section class="project">
     <header class="project-header" data-reveal>
-      <p class="eyebrow">FootfallCam — 2020–2025</p>
+     
       <h2 class="word-reveal">Website Evolution</h2>
       <p class="project-copy">
         Built a practical Figma component library to support faster website
@@ -149,7 +130,7 @@
   <!-- ============ MORE THAN A WEBSITE ============ -->
   <section class="project">
     <header class="project-header" data-reveal>
-      <p class="eyebrow">FootfallCam — 2020–2025</p>
+      
       <h2 class="word-reveal">More than a Website</h2>
       <p class="project-copy">
         Design became the bridge between business strategy and engineering
@@ -166,7 +147,7 @@
   <!-- ============ BUILDING A DESIGN SYSTEM ============ -->
   <section class="project">
     <header class="project-header" data-reveal>
-      <p class="eyebrow">FootfallCam — 2020–2025</p>
+     
       <h2 class="word-reveal">Building a Design System</h2>
       <p class="project-copy">
         Created complex visuals for sales, partner meetings, webinars, internal
@@ -201,7 +182,7 @@
   <!-- ============ ENTERPRISE MARKETING ============ -->
   <section class="project">
     <header class="project-header" data-reveal>
-      <p class="eyebrow">FootfallCam — 2020–2025</p>
+      
       <h2 class="word-reveal">Enterprise Marketing</h2>
       <p class="project-copy">
         Supported hardware product development from the visual and user-facing
@@ -217,7 +198,7 @@
   <!-- ============ DASHBOARD (MAGIC MIRROR) ============ -->
   <section class="project">
     <header class="project-header" data-reveal>
-      <p class="eyebrow">Magic Mirror — 2020–2025</p>
+      
       <h2 class="word-reveal">Dashboard</h2>
       <p class="project-copy">
         Worked on website revamp, UI direction, presentation materials, and
@@ -242,7 +223,7 @@
   <!-- ============ BRAND EVOLUTION (NURSERYWEB) ============ -->
   <section class="project">
     <header class="project-header" data-reveal>
-      <p class="eyebrow">nurseryweb — 2020–2025</p>
+      
       <h2 class="word-reveal">Brand Evolution</h2>
       <p class="project-copy">
         Designed logos, website layouts, and visual directions for UK nursery
@@ -265,7 +246,7 @@
   <!-- ============ SELECTED WORKS ============ -->
   <section class="project">
     <header class="project-header" data-reveal>
-      <p class="eyebrow">FootfallCam — 2020–2025</p>
+      
       <h2 class="word-reveal">Selected Works</h2>
       <p class="project-copy">
         A wider look across logos, website layouts, and dashboard work spanning
@@ -285,7 +266,7 @@
   <!-- ============ DESIGNING FOR INTERACTION ============ -->
   <section class="project">
     <header class="project-header" data-reveal>
-      <p class="eyebrow">Magic Mirror — 2020–2025</p>
+     
       <h2 class="word-reveal">Designing for Interaction</h2>
       <p class="project-copy">
         Unlike websites, interactive kiosks demand immediate clarity. Every
@@ -308,7 +289,7 @@
   <!-- ============ DESIGNING FOR SMALL BUSINESSES ============ -->
   <section class="project">
     <header class="project-header" data-reveal>
-      <p class="eyebrow">nurseryweb — 2020–2025</p>
+    
       <h2 class="word-reveal">Designing for Small Businesses</h2>
       <p class="project-copy">
         Created logos and websites tailored to individual UK nursery brands,
@@ -340,15 +321,23 @@
     <a href="mailto:hello@yuenyifoo.com">Email</a>
     <a href="https://www.linkedin.com/" target="_blank" rel="noopener">LinkedIn</a>
     <a href="assets/yuenyifoo-cv.pdf" target="_blank" rel="noopener">CV</a>
+    <p class="footer-meta">Yuen Yi Foo — Senior Visual Designer</p>
   </div>
-  <p class="footer-meta">Yuen Yi Foo — Senior Visual Designer</p>
+  
 </footer>
+
+
+<div id="scroll-indicator-container"></div>
 
 <script src="js/script.js"></script>
 <script defer src="js/hero-grid.js"></script>
 <script defer src="js/word-reveal.js"></script>
 <script defer src="js/image-trail.js"></script>
 <script defer src="js/mobile-frame.js"></script>
+<script defer src="js/progressive-scroll-indicator.js"></script>
+<script defer src="js/scroll-down-arrow.js"></script>
+<script defer src="js/floating-nav.js"></script>
+ 
 </body>
 </html>
 
