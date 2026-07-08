@@ -93,6 +93,7 @@ background: rgba(0, 0, 0, 0.2);
 }
 
 .logo-link {
+  font-size:clamp(14px, 1.6vw, 16px);
   font-weight: 600;
   display: flex;
   text-decoration: none;
@@ -115,6 +116,7 @@ background: rgba(0, 0, 0, 0.2);
   text-decoration: none;
   color: var(--text);
   font-family: var(--mono);
+  font-size: clamp(14px, 1.6vw, 16px);
   border-radius: 4px;
   transition: background 0.3s ease;
 }
@@ -701,4 +703,36 @@ a:focus-visible, button:focus-visible{
   background: #ffffff;
   border-radius: 2px;
   transition: height 0.1s linear;
+}
+
+@media (max-width: 860px) {
+  .hero {
+    /* 取消强制的全屏高度，改为自适应 */
+    min-height: auto; 
+    /* 或者设置为一个更合理的视口高度，减去导航栏空间 */
+    min-height: calc(100dvh - 80px); 
+    padding-top: 40px; /* 给导航栏留出空间 */
+    padding-bottom: 40px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  #image-trail-container {
+    /* 强制限制图片容器的高度，避免撑开 section */
+    max-height: 300px; 
+    overflow: hidden;
+    margin: 20px 0;
+  }
+  
+  /* 如果里面有图片，确保图片按比例缩放 */
+  #image-trail-container img {
+    width: 100%;
+    height: auto;
+    object-fit: contain;
+  }
+
+  
+  h1.hero-title {
+    margin: 0px 0px 0px 0px !important;
+  }
 }
